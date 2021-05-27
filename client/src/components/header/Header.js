@@ -2,12 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+import NotFound from '../utils/NotFound/NotFound'
 
 
 function Header() {
     const auth = useSelector(state => state.auth)
 
-    const { user, isLogged } = auth
+    const { user, isLogged, isAdmin } = auth
+
 
 
     const handleLogout = async () => {
@@ -26,7 +28,9 @@ function Header() {
                 <img src={user.avatar} alt="" /> {user.name} <i className="fas fa-angle-down"></i>
             </Link>
             <ul className="dropdown">
-                <li><Link to="/profile">Profil</Link></li>
+                <li><Link to="/profile">Profile</Link></li>
+                <li>{isAdmin ? <Link to="/calendar">Appointment Managing </Link> : <Link to="/calendar">My Appointment List</Link>}</li>
+                <li>{isAdmin ? <Link to="/users">Users </Link> : NotFound}</li>
                 <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
             </ul>
         </li>

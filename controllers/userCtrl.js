@@ -26,7 +26,7 @@ const userCtrl = {
             const user = await Users.findOne({ email })
             if (user) return res.status(400).json({ msg: "This email already exist." })
 
-            if (password.length < 5)
+            if (password.length < 6)
                 return res.status(400).json({ msg: "Password must be at least 5 characters." })
 
             const passwordHash = await bcrypt.hash(password, 12)
