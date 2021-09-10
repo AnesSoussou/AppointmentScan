@@ -1,7 +1,7 @@
 import React from 'react'
 import './home.css'
 
-function Home() {
+function About() {
     return (
         <div className="home_page">
             <h2>Hello everyone!</h2>
@@ -18,4 +18,4 @@ function Home() {
     )
 }
 
-export default Home
+export default About

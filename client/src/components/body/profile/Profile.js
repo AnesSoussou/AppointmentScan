@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { isLength, isMatch } from '../../utils/validation/Validation'
+import { isLength, isMatch, isEmail } from '../../utils/validation/Validation'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
 import { fetchAllUsers, dispatchGetAllUsers } from '../../../redux/actions/usersAction'
+import editUser from './EditUser'
 
 const initialState = {
     name: '',
     password: '',
     cf_password: '',
+    email: '',
     err: '',
     success: ''
 }
@@ -17,11 +19,10 @@ function Profile() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
 
-    const users = useSelector(state => state.users)
-
+    // const users = useSelector(state => state.users)
     const { user, isAdmin } = auth
     const [data, setData] = useState(initialState)
-    const { name, password, cf_password, err, success } = data
+    const { name, email, password, cf_password, err, success } = data
 
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -41,6 +42,7 @@ function Profile() {
         const { name, value } = e.target
         setData({ ...data, [name]: value, err: '', success: '' })
     }
+
 
     const changeAvatar = async (e) => {
         e.preventDefault()
@@ -75,7 +77,8 @@ function Profile() {
         try {
             axios.patch('/user/update', {
                 name: name ? name : user.name,
-                avatar: avatar ? avatar : user.avatar
+                avatar: avatar ? avatar : user.avatar,
+                email: email ? email : user.email
             }, {
                 headers: { Authorization: token }
             })
@@ -104,11 +107,26 @@ function Profile() {
         }
     }
 
+    const updateEmail = () => {
+        if (!isEmail(email))
+            return setData({ ...data, err: "Please enter a valid email", success: '' })
+
+        try {
+            axios.post('/user/resetEmail', { email }, {
+                headers: { Authorization: token }
+            })
+
+            setData({ ...data, err: '', success: "Updated Success!" })
+        } catch (err) {
+            setData({ ...data, err: err.response.data.msg, success: '' })
+        }
+    }
+
     const handleUpdate = () => {
         if (name || avatar) updateInfor()
         if (password) updatePassword()
+        if (email) updateEmail()
     }
-
 
     return (
         <>
@@ -120,11 +138,13 @@ function Profile() {
             <div className="profile_page">
                 <div className="col-left">
                     <h2>{isAdmin ? "Admin Profile" : "User Profile"}</h2>
-
                     <div className="avatar">
+
                         <img src={avatar ? avatar : user.avatar} alt="" />
                         <span>
+
                             <i className="fas fa-camera"></i>
+
                             <p>Change</p>
                             <input type="file" name="file" id="file_up" onChange={changeAvatar} />
                         </span>
@@ -136,10 +156,11 @@ function Profile() {
                             placeholder="Your name" onChange={handleChange} />
                     </div>
 
+
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input type="email" name="email" id="email" defaultValue={user.email}
-                            placeholder="Your email address" disabled />
+                            placeholder="Your email address" onChange={handleChange} />
                     </div>
 
                     <div className="form-group">

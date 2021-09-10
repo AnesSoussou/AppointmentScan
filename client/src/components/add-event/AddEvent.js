@@ -3,17 +3,29 @@ import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import "./add-event.css";
+import { useDispatch } from 'react-redux'
+
 
 class AddEventModal extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             showModal: this.props.showModal || false,
             toggleModal: this.props.toggleModal,
             eventToEdit: this.props.eventToEdit,
-            handleFormSubmit: this.props.handleFormSubmit
-        };
-    }
+            deleteEvent: this.props.deleteEvent,
+            handleFormSubmit: this.props.handleFormSubmit,
+        }
+    };
+
+    deleteEvent(event) {
+        this.state.dispatch({
+            payload: event
+        });
+        this.setState({ showModal: false });
+    };
+
     submitForm = e => {
         e.preventDefault();
         const { date, id, title, description, time } = this.state.eventToEdit;
@@ -54,9 +66,11 @@ class AddEventModal extends Component {
     };
 
     render() {
-        const { title, description, time } = this.state.eventToEdit;
+        const { title, description, time, } = this.state.eventToEdit;
+
         return (
             <div>
+
                 <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
@@ -121,6 +135,14 @@ class AddEventModal extends Component {
                                     >
                                         Save Event Data
                   </Button>
+
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={this.deleteEvent.event}
+                                    >
+                                        Delete Data
+                  </Button>
                                 </center>
                             </div>
                         </form>
@@ -128,7 +150,9 @@ class AddEventModal extends Component {
                 </Modal>
             </div>
         );
+
     }
 }
+
 
 export default AddEventModal;

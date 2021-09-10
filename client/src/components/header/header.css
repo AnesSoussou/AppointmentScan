@@ -6,7 +6,7 @@ header {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    padding: 0 30px;
+    padding: 0 100px;
 }
 
 header a {
@@ -17,7 +17,7 @@ header a {
 
 header ul li {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 10px;
     opacity: 0.7;
 }
 
@@ -34,8 +34,8 @@ header ul li img {
 
 /* --------- Dropdown ---------- */
 .drop-nav {
-    position: relative;
-    padding: 10px 0;
+    position:relative;
+    padding: 10px 0px;
 }
 
 .drop-nav a {
@@ -47,7 +47,7 @@ header ul li img {
     position: absolute;
     background: #282c34;
     width: 100%;
-    width: calc(100% + 30px);
+    width: calc(100% + 100px);
     top: 50px;
     display: none;
 }

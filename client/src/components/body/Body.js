@@ -7,14 +7,13 @@ import NotFound from '../utils/NotFound/NotFound'
 
 import ForgotPass from '../body/auth/ForgotPassword'
 import ResetPass from '../body/auth/ResetPassword'
-
+import ResetEmail from '../body/auth/ResetEmail'
+import Client from './users/clientList/pages/Clients/Clients'
 import Profile from '../body/profile/Profile'
 import Users from '../body/users/Users'
-import Calendar from '../calendar/Calendar'
+import Calendar from '../calendar/calendar'
 import EditUser from '../body/profile/EditUser'
-
-import Home from '../body/home/Home'
-
+import About from './home/About'
 import { useSelector } from 'react-redux'
 
 function Body() {
@@ -23,20 +22,25 @@ function Body() {
     return (
         <section>
             <Switch>
-                <Route path="/" component={Home} exact />
+                <Route path="/" component={isLogged ? Calendar : Login} exact />
+                <Route path="/about" component={About} exact />
 
                 <Route path="/login" component={isLogged ? NotFound : Login} exact />
                 <Route path="/register" component={isLogged ? NotFound : Register} exact />
 
                 <Route path="/forgot_password" component={isLogged ? NotFound : ForgotPass} exact />
                 <Route path="/user/reset/:token" component={isLogged ? NotFound : ResetPass} exact />
+                <Route path="/user/resetEmail/:token" component={isLogged ? NotFound : ResetEmail} exact />
 
                 <Route path="/user/activate/:activation_token" component={ActivationEmail} exact />
 
-                <Route path="/profile" component={isLogged ? Profile : NotFound} exact />
-                <Route path="/users" component={isAdmin ? Users : NotFound} exact />
-                <Route path="/calendar" component={isLogged ? Calendar : NotFound} exact />
-                <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />
+                <Route path="/profile" component={isLogged ? Profile : ""} exact />
+                <Route path="/users" component={isAdmin ? Users : ""} exact />
+                <Route path="/clients" component={isAdmin ? Client : ""} exact />
+
+
+                <Route path="/calendar" component={isLogged ? Calendar : ""} exact />
+                <Route path="/edit_user/:id" component={isAdmin ? EditUser : ""} exact />
 
             </Switch>
         </section>

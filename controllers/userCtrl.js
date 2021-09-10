@@ -81,7 +81,7 @@ const userCtrl = {
             res.cookie('refreshtoken', refresh_token, {
                 httpOnly: true,
                 path: '/user/refresh_token',
-                maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+                maxAge: 360 * 24 * 60 * 60 * 1000 // 360 days
             })
 
             res.json({ msg: "Login success!" })
@@ -221,7 +221,7 @@ const userCtrl = {
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
                     path: '/user/refresh_token',
-                    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+                    maxAge: 360 * 24 * 60 * 60 * 1000 // 360 days
                 })
 
                 res.json({ msg: "Login success!" })
@@ -236,7 +236,7 @@ const userCtrl = {
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
                     path: '/user/refresh_token',
-                    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+                    maxAge: 360 * 24 * 60 * 60 * 1000 // 360 days
                 })
 
                 res.json({ msg: "Login success!" })
@@ -271,7 +271,7 @@ const userCtrl = {
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
                     path: '/user/refresh_token',
-                    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+                    maxAge: 360 * 24 * 60 * 60 * 1000 // 360 days
                 })
 
                 res.json({ msg: "Login success!" })
@@ -286,7 +286,7 @@ const userCtrl = {
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
                     path: '/user/refresh_token',
-                    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+                    maxAge: 360 * 24 * 60 * 60 * 1000 // 360 days
                 })
 
                 res.json({ msg: "Login success!" })

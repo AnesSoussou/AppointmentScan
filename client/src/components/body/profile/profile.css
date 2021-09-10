@@ -101,12 +101,15 @@
     text-transform: uppercase;
     color: #333;
     margin: 10px 0;
+
 }
 
 /* ------------ Table------------ */
 .customers {
     border-collapse: collapse;
-    width: 100%;
+    width: 90%;
+
+    margin: auto;
 }
 
 .customers td,

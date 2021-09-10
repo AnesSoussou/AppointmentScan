@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Search } from "@material-ui/icons";
+import { makeStyles, Toolbar, InputAdornment } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
@@ -16,7 +18,6 @@ const initialState = {
 function Users() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-
     const users = useSelector(state => state.users)
 
     const { user, isAdmin } = auth
@@ -26,6 +27,7 @@ function Users() {
     const [setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const [callback, setCallback] = useState(false)
+
 
     const dispatch = useDispatch()
 
@@ -42,8 +44,9 @@ function Users() {
         setData({ ...data, [name]: value, err: '', success: '' })
     }
 
-
-
+    const handleSearch = e => {
+        let target = e.target;
+    }
 
     const handleDelete = async (id) => {
         try {
@@ -72,9 +75,8 @@ function Users() {
             </div>
             <div className="profile_page">
             </div>
-
             <div className="col-right">
-                <h2>{isAdmin ? "Users" : "My Orders"}</h2>
+                <h2 style={{ textAlign: "center", margin: "30px", fontSize: "60px", color: "#66a6ff" }}>{isAdmin ? "Users List" : "My Orders"}</h2>
 
                 <div style={{ overflowX: "auto" }}>
                     <table className="customers">

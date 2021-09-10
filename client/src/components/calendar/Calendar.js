@@ -46,7 +46,7 @@ class Calendar extends Component {
   }
 
   rendeChangeLanguageButtons() {
-    const languages = ["en", "fe"];
+    const languages = ["en", "fr"];
     let buttons = [];
     for (let language of languages) {
       buttons.push(
@@ -90,9 +90,7 @@ class Calendar extends Component {
         </div>
         <div className="col col-center">
           <span>
-            {t("month." + month, {
-              lng: i18n.language
-            })}
+            {t(month , { lng: i18n.language })}
           </span>
         </div>
         <div className="col col-end" onClick={this.nextMonth}>
@@ -103,11 +101,11 @@ class Calendar extends Component {
   }
 
   renderDays() {
-    const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    const mounths = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
     const days = [];
     const t = this.props.t;
     const i18n = this.props.i18n;
-    for (let day of daysOfWeek) {
+    for (let day of mounths) {
       days.push(
         <div className="col col-center" key={day}>
           {t("days." + day, { lng: i18n.language })}
@@ -141,10 +139,10 @@ class Calendar extends Component {
         days.push(
           <div
             className={`col cell ${!isSameMonth(day, monthStart)
-                ? "disabled"
-                : isSameDay(day, selectedDate)
-                  ? "selected"
-                  : ""
+              ? "disabled"
+              : isSameDay(day, selectedDate)
+                ? "selected"
+                : ""
               }`}
             key={day}
           >

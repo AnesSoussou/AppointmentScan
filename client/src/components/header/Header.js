@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import NotFound from '../utils/NotFound/NotFound'
+import Img from './App3.png'
+
 
 
 function Header() {
@@ -28,12 +30,14 @@ function Header() {
                 <img src={user.avatar} alt="" /> {user.name} <i className="fas fa-angle-down"></i>
             </Link>
             <ul className="dropdown">
-                <li><Link to="/profile">Profile</Link></li>
-                <li>{isAdmin ? <Link to="/calendar">Appointment Managing </Link> : <Link to="/calendar">My Appointment List</Link>}</li>
-                <li>{isAdmin ? <Link to="/users">Users </Link> : NotFound}</li>
-                <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
+                <li><Link to="/profile"><i class="fas fa-user"></i>  Profile</Link></li>
+                <li>{isAdmin ? <Link to="/calendar"><i class="far fa-calendar-alt"></i> Manage Appointments
+                </Link> : <Link to="/calendar"><i class="far fa-calendar-alt"></i> My Appointment List</Link>}</li>
+                <li>{isAdmin ? <Link to="/users"><i class="fas fa-users"></i> Users List </Link> : NotFound}</li>
+                <li>{isAdmin ? <Link to="/clients"><i class=" fas fa-id-card"></i> Clients List </Link> : NotFound}</li>
+                <li><Link to="/logout" onClick={handleLogout}><i class="fas fa-sign-out-alt"></i> Logout</Link></li>
             </ul>
-        </li>
+        </li >
     }
 
     const transForm = {
@@ -43,16 +47,19 @@ function Header() {
     return (
         <header>
             <div className="logo">
-                <h1><Link to="/"><img src="https://scontent.ftun17-1.fna.fbcdn.net/v/t31.18172-8/902628_186142268203799_274835585_o.png?_nc_cat=108&ccb=1-3&_nc_sid=174925&_nc_ohc=uUrO6LpQrLEAX9YxaCg&_nc_ht=scontent.ftun17-1.fna&oh=b4d62b6c11f98f275bf1a2334465a974&oe=60D2D70D"
-                    width="100px" style={{ background: "#ffffff" }} padding="20px" />  APPOINTMENT <i class="fas fa-calendar-check"></i></Link></h1>
+                <h1><Link to="/"><img src={Img} width="50px" /> APPOINTMENT </Link></h1>
             </div>
 
             <ul style={transForm}>
-                <li><Link to="/"><i class="far fa-lightbulb"></i> About</Link></li>
+
                 {
                     isLogged
                         ? userLink()
-                        : <li><Link to="/login"><i className="fas fa-user"></i> Sign in</Link></li>
+                        : <li><Link to="/about"><i class="far fa-lightbulb"></i> About </Link>
+                            <Link to="/login"><i className="fas fa-user"></i> Sign in</Link>
+                        </li>
+
+
                 }
 
             </ul>

@@ -19,6 +19,8 @@ app.use(fileUpload({
 // Routes
 app.use('/user', require('./routes/userRouter'))
 app.use('/api', require('./routes/upload'))
+app.use('/clients', require('./routes/clientRouter'))
+
 
 //Connect to MongDB
 const URI = process.env.MONGO_URL
@@ -32,7 +34,7 @@ mongoose.connect(URI, {
     console.log("Connected to mongoDB")
 })
 
-if (process.env.NODE_ENV === 'production'){
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
